@@ -1,0 +1,12 @@
+My version of the Vigenere Cypher is that:
+ - it is case insensitive (doesn't matter if it's uppercase or lowercase)
+ - and it ignores any non-alphabetic characters (spaces, punctuation, numbers, etc.)
+
+Project 1: Server handles one client
+Run oc_server.py and then run client.py
+
+Project 2: Server handles multiple clients
+Run mc_server.py then run client.py
+
+Use this website to verify if the encryption/decryption is correct:
+https://www.cs.du.edu/~snarayan/crypt/vigenere.html

@@ -1,0 +1,52 @@
+Project 1: (Symmetric key-based authentication protocol)
+Project 1 implements a symmetric key-based authentication protocol using AES encryption 
+over socket communication. The goal is to ensure secure authentication between two parties 
+(Alice and Bob) using a shared secret key.
+
+Objectives
+ - Both Alice and Bob verify each other’s identity before communication.
+ - Messages are encrypted with AES to prevent unauthorized access.
+ - The protocol uses nonces (random unique values) to prevent attackers 
+   from reusing old messages.
+
+Workflow
+Alice → Bob: Sends her identity and a random nonce 
+Bob → Alice: Responds with his nonce and an encrypted message containing his identity and nonce.
+Alice → Bob: Sends an encrypted message containing her identity and to complete authentication.
+
+Project 2: (Public Key-Based Authentication Protocol)
+The goal of this project is to implement secure authentication using public-key 
+cryptography (RSA) instead of a shared symmetric key.
+
+Objectives
+ - Unlike symmetric key encryption (AES in Project 1), RSA allows secure authentication 
+   without needing a shared secret.
+ - Each party has a public and private key pair, making key distribution easier.
+ - Messages are encrypted with the recipient’s public key and decrypted using the 
+   corresponding private key.
+ - Ensures only the intended recipient can read the message.
+ - By using asymmetric cryptography, attackers cannot fake identities without knowing 
+   the private key.
+
+Workflow
+Alice → Bob: Sends her identity and a random nonce.
+Bob → Alice: Responds with his nonce and an encrypted message (Bob’s identity + nonce) 
+using Alice’s public key.
+Alice → Bob: Sends an encrypted message (Alice’s identity + nonce) using Bob’s public key.
+
+Project 3: (Digital Signature)
+The original protocol had a replay attack vulnerability—an attacker could intercept and 
+resend Alice’s signed message without modification. To prevent this, we add message 
+freshness verification using a nonce.
+
+Revised Protocol
+1. Bob (Server) Generates a Nonce:
+Bob first sends a random nonce to Alice before she signs the message.
+
+2. Alice (Client) Signs the Message with the Nonce:
+Instead of signing a static message, Alice signs "Hello Bob, this is Alice!" + nonce.
+
+3. Bob Verifies the Signature with the Nonce:
+Bob checks if the received message + nonce matches the original signed content.
+
+This ensures each signature is unique per session, eliminating replay attacks.

@@ -1,0 +1,21 @@
+Phase 1:
+ - run kdc_1.py first then run the clients: cli_a_1.py, cli_a_2.py
+ - json files will be created to all 3 of them, the KDC server, and the 2 clients.
+ - the clients have their ids, private and public keys, nonces, and master keys inside the json file
+ - the server has its id, private and public keys,
+ - nonces, master keys, and the public keys for both clients
+
+Phase 2:
+ - same shit with Phase 1 for running it, but this time the numbers are 2 (stands for Phase 2)
+ - unlike Phase 1, Phase 2 waits for both clients to connect
+ - it encrypts the key KAB using the master key (KA for client A and KB for client B)
+ - then the key is sent to right clients.
+ - the clients loads their master key (KA and KB) from a JSON file which was created in Phase 1
+ - connects to the server and sends a message
+ - then receives the encrypted key from the server
+ - the client decrypts the key using its master key
+
+Its vulnerable to DDoS attacks
+Theres a gap in phase 2 where DDoS attacks can occur
+To solve this problem, the KDC server has to send both A and B data to A
+and then A would send data to B
